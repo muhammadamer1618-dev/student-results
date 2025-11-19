@@ -35,8 +35,22 @@ td{
     font-size:20px
 }
 
-.label{color:#c62828;font-weight:bold;width:30%}
+.label{color:#c62828;font-weight:bold;width:35%}
 .value{color:#1565c0}
+
+.row2{
+    display:flex;
+    justify-content:space-between;
+    margin-top:15px;
+}
+
+.box{
+    width:48%;
+    border:1px solid #d0d0d0;
+    padding:12px;
+    font-size:20px;
+    border-radius:8px;
+}
 
 @media print{
     header,button,input{display:none}
@@ -61,18 +75,29 @@ td{
 <h2 style="text-align:center;color:#1565c0;margin-bottom:10px">مدرسة الفلاح الأهليه</h2>
 <h3 style="text-align:center;margin-bottom:25px">شهادة طالب</h3>
 
+<!-- السطر الأول: الاسم والصف -->
+<div class="row2">
+    <div class="box"><span class="label">اسم الطالب: </span><span class="value" id="student_name"></span></div>
+    <div class="box"><span class="label">الصف: </span><span class="value" id="grade"></span></div>
+</div>
+
+<!-- السطر الثاني: المرحلة والمادة -->
+<div class="row2">
+    <div class="box"><span class="label">المرحلة: </span><span class="value" id="stage"></span></div>
+    <div class="box"><span class="label">المادة: </span><span class="value" id="s_subject"></span></div>
+</div>
+
+<!-- الدرجات -->
 <table>
-<tr><td class="label">المادة:</td><td class="value" id="s_subject"></td></tr>
-<tr><td class="label">اسم الطالب:</td><td class="value" id="student_name"></td></tr>
-<tr><td class="label">المرحلة:</td><td class="value" id="stage"></td></tr>
-<tr><td class="label">الصف:</td><td class="value" id="grade"></td></tr>
 <tr><td class="label">الدرجة النهائية:</td><td class="value" id="fullMark"></td></tr>
 <tr><td class="label">درجة الطالب:</td><td class="value" id="mark"></td></tr>
+<tr><td class="label">التقدير:</td><td class="value" id="rating"></td></tr>
 <tr><td class="label">اسم المعلم:</td><td class="value" id="teacher"></td></tr>
 </table>
 
 <br>
 
+<!-- بيانات الإدارة -->
 <table>
 <tr><td class="label">المشرف:</td><td class="value" id="s_supervisor"></td></tr>
 <tr><td class="label">رئيس قسم الإشراف:</td><td class="value" id="s_head"></td></tr>
@@ -97,6 +122,16 @@ function getS(){
     return JSON.parse(s);
 }
 
+function calcRating(mark, full){
+    let p = (mark / full) * 100;
+
+    if(p >= 90) return "ممتاز";
+    if(p >= 80) return "جيد جدًا";
+    if(p >= 70) return "جيد";
+    if(p >= 60) return "مقبول";
+    return "ضعيف";
+}
+
 function loadData(){
     const codeInput = document.getElementById("code").value.trim();
     let all = localStorage.getItem('students');
@@ -115,21 +150,24 @@ function loadData(){
 
     const st = all[codeInput];
     const s  = getS();
-
     const cert = document.getElementById("cert");
     cert.style.display = "block";
 
-    document.getElementById("s_subject").innerText    = s.subject || "";
-    document.getElementById("s_supervisor").innerText = s.supervisor || "";
-    document.getElementById("s_head").innerText       = s.head || "";
-    document.getElementById("s_principal").innerText  = s.principal || "";
+    document.getElementById("s_subject").innerText    = s.subject;
+    document.getElementById("s_supervisor").innerText = s.supervisor;
+    document.getElementById("s_head").innerText       = s.head;
+    document.getElementById("s_principal").innerText  = s.principal;
 
-    document.getElementById("student_name").innerText = st.name || "";
-    document.getElementById("stage").innerText        = st.stage || "";
-    document.getElementById("grade").innerText        = st.grade || "";
-    document.getElementById("fullMark").innerText     = st.fullMark || "";
-    document.getElementById("mark").innerText         = st.mark || "";
-    document.getElementById("teacher").innerText      = st.teacher || "";
+    document.getElementById("student_name").innerText = st.name;
+    document.getElementById("stage").innerText        = st.stage;
+    document.getElementById("grade").innerText        = st.grade;
+    document.getElementById("fullMark").innerText     = st.fullMark;
+    document.getElementById("mark").innerText         = st.mark;
+    document.getElementById("teacher").innerText      = st.teacher;
+
+    // حساب التقدير
+    let rating = calcRating(Number(st.mark), Number(st.fullMark));
+    document.getElementById("rating").innerText = rating;
 }
 </script>
 

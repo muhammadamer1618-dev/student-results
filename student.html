@@ -13,7 +13,7 @@ table{width:100%;border-collapse:collapse;margin-top:20px;font-size:22px}
 td{border:1px solid #000;padding:10px;text-align:center}
 .label{color:#d32f2f;font-weight:bold}
 .value{color:#1565c0;font-weight:bold}
-.title{text-align:center;font-size:26px;color:#d32f2f;font-weight:bold;padding:10px;border:1px solid #000;margin-bottom:0}
+.title{text-align:center;font-size:26px;color:#d32f2f;font-weight:bold;padding:10px;border:1px solid #000;margin-bottom:0;margin-top:15px}
 .btn{width:100%;padding:15px;border:none;border-radius:8px;font-size:18px;margin-bottom:10px}
 .view{background:#1976d2;color:white}
 .print{background:#388e3c;color:white}
@@ -32,23 +32,19 @@ td{border:1px solid #000;padding:10px;text-align:center}
 <div id="cert" style="display:none">
 
 <!-- ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ -->
-<!-- العنوان الثابت في أعلى الشهادة -->
+<!-- عنوان المدرسة + القسم 100% ثابت -->
 <!-- ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ -->
 
-<h1 style="text-align:center; margin:0; padding:0; color:#1565c0; font-size:32px; font-weight:bold;">
+<h1 style="text-align:center;color:#1565c0;font-size:34px;margin:0;font-weight:bold;">
     مدارس الفلاح الأهلية
 </h1>
 
-<h2 style="text-align:center; margin-top:5px; margin-bottom:20px; color:#d32f2f; font-size:26px; font-weight:bold;">
+<h2 style="text-align:center;color:#d32f2f;font-size:26px;margin-top:5px;font-weight:bold;">
     قسم اللغة الإنجليزية
 </h2>
 
 <!-- عنوان الشهادة -->
 <div class="title">شهادة درجات مادة اللغة الإنجليزية</div>
-
-<!-- ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ -->
-<!-- جدول بيانات الطالب -->
-<!-- ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ -->
 
 <table>
 <tr><td class="label">اسم الطالب</td><td class="value" id="student_name"></td></tr>
@@ -58,10 +54,6 @@ td{border:1px solid #000;padding:10px;text-align:center}
 <tr><td class="label">درجة الطالب</td><td class="value" id="mark"></td></tr>
 <tr><td class="label">التقدير</td><td class="value" id="rating"></td></tr>
 </table>
-
-<!-- ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ -->
-<!-- جدول التواقيع -->
-<!-- ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ -->
 
 <table>
 <tr>

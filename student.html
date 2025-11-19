@@ -1,7 +1,12 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>شهادة الطالب</title>
 
-<!DOCTYPE html><html lang='ar' dir='rtl'><head>
-<meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1'>
-<title>شهادة الطالب</title><link href='https://fonts.googleapis.com/css2?family=Calibri:wght@400;700&display=swap' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css2?family=Calibri:wght@400;700&display=swap' rel='stylesheet'>
+
 <style>
 body{font-family:Calibri;background:#f2f6fa;margin:0}
 header{background:#1976d2;color:white;padding:20px;text-align:center;font-size:24px}
@@ -9,75 +14,120 @@ header{background:#1976d2;color:white;padding:20px;text-align:center;font-size:2
 input{width:100%;padding:15px;font-size:18px;border-radius:8px;border:1px solid #999;margin-bottom:15px}
 button{width:100%;padding:16px;background:#1976d2;color:white;border:none;border-radius:8px;font-size:18px;margin-bottom:10px}
 
-#cert{background:white;border:6px double gold;padding:25px;border-radius:12px;display:none;margin-top:20px}
-.label{color:#c62828;font-weight:bold;font-size:20px}
-.value{color:#1565c0;font-size:20px}
+#cert{
+    background:white;
+    border:6px double gold;
+    padding:25px;
+    border-radius:12px;
+    display:none;
+    margin-top:20px
+}
 
-@media print{header,button,input{display:none} body{background:white}}
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px
+}
+
+td{
+    border:1px solid #d0d0d0;
+    padding:12px;
+    font-size:20px
+}
+
+.label{color:#c62828;font-weight:bold;width:30%}
+.value{color:#1565c0}
+
+@media print{
+    header,button,input{display:none}
+    body{background:white}
+}
 </style>
-</head><body>
+</head>
+
+<body>
 
 <header>شهادة الطالب</header>
 
-<div class='container'>
-<input id='code' placeholder='ادخل كود الطالب'>
-<button onclick='loadData()'>عرض</button>
-<button onclick='window.print()'>طباعة</button>
+<div class="container">
+
+<input id="code" placeholder="ادخل كود الطالب">
+<button onclick="loadData()">عرض</button>
+<button onclick="window.print()">طباعة</button>
 <button onclick="location='index.html'">رجوع</button>
 
-<div id='cert'>
-<h2 style='text-align:center;color:#1565c0;margin-bottom:10px'>مدرسة الفلاح الأهليه</h2>
-<h3 style='text-align:center;margin-bottom:25px'>شهادة طالب</h3>
+<div id="cert">
 
-<div><span class='label'>المادة:</span> <span class='value' id='s_subject'></span></div>
-<div><span class='label'>اسم الطالب:</span> <span class='value' id='name'></span></div>
-<div><span class='label'>المرحلة:</span> <span class='value' id='stage'></span></div>
-<div><span class='label'>الصف:</span> <span class='value' id='grade'></span></div>
-<div><span class='label'>الدرجة النهائية:</span> <span class='value' id='fullMark'></span></div>
-<div><span class='label'>درجة الطالب:</span> <span class='value' id='mark'></span></div>
-<div><span class='label'>اسم المعلم:</span> <span class='value' id='teacher'></span></div>
+<h2 style="text-align:center;color:#1565c0;margin-bottom:10px">مدرسة الفلاح الأهليه</h2>
+<h3 style="text-align:center;margin-bottom:25px">شهادة طالب</h3>
+
+<table>
+<tr><td class="label">المادة:</td><td class="value" id="s_subject"></td></tr>
+<tr><td class="label">اسم الطالب:</td><td class="value" id="name"></td></tr>
+<tr><td class="label">المرحلة:</td><td class="value" id="stage"></td></tr>
+<tr><td class="label">الصف:</td><td class="value" id="grade"></td></tr>
+<tr><td class="label">الدرجة النهائية:</td><td class="value" id="fullMark"></td></tr>
+<tr><td class="label">درجة الطالب:</td><td class="value" id="mark"></td></tr>
+<tr><td class="label">اسم المعلم:</td><td class="value" id="teacher"></td></tr>
+</table>
+
 <br>
-<div><span class='label'>المشرف:</span> <span class='value' id='s_supervisor'></span></div>
-<div><span class='label'>رئيس قسم الإشراف:</span> <span class='value' id='s_head'></span></div>
-<div><span class='label'>مدير المدرسة:</span> <span class='value' id='s_principal'></span></div>
+
+<table>
+<tr><td class="label">المشرف:</td><td class="value" id="s_supervisor"></td></tr>
+<tr><td class="label">رئيس قسم الإشراف:</td><td class="value" id="s_head"></td></tr>
+<tr><td class="label">مدير المدرسة:</td><td class="value" id="s_principal"></td></tr>
+</table>
 
 </div>
 </div>
 
 <script>
 function getS(){
- let s=localStorage.getItem('schoolSettings');
- if(!s){
-   s={subject:"لغة انجليزية",supervisor:"محمد عامر أحمد",head:"أحمد سمير عباس",principal:"سعيد بن علي الجمعان"};
-   localStorage.setItem('schoolSettings',JSON.stringify(s));
- }
- return JSON.parse(s);
+    let s = localStorage.getItem('schoolSettings');
+    if(!s){
+        s = {
+            subject: "لغة انجليزية",
+            supervisor: "محمد عامر أحمد",
+            head: "أحمد سمير عباس",
+            principal: "سعيد بن علي الجمعان"
+        };
+        localStorage.setItem('schoolSettings', JSON.stringify(s));
+    }
+    return JSON.parse(s);
 }
 
 function loadData(){
- let c=code.value.trim();
- let all=localStorage.getItem('students');
- if(!all) return alert("لا توجد بيانات");
- all=JSON.parse(all);
+    let codeValue = code.value.trim();
+    let all = localStorage.getItem('students');
 
- if(!all[c]) return alert("لا يوجد طالب بهذا الكود");
+    if(!all){ alert("لا توجد بيانات"); return; }
 
- let s=getS(), st=all[c];
+    all = JSON.parse(all);
 
- cert.style.display="block";
+    if(!all[codeValue]){
+        alert("لا يوجد طالب بهذا الكود");
+        return;
+    }
 
- s_subject.innerText=s.subject;
- s_supervisor.innerText=s.supervisor;
- s_head.innerText=s.head;
- s_principal.innerText=s.principal;
+    let st = all[codeValue];
+    let s = getS();
 
- name.innerText=st.name||"";
- stage.innerText=st.stage||"";
- grade.innerText=st.grade||"";
- fullMark.innerText=st.fullMark||"";
- mark.innerText=st.mark||"";
- teacher.innerText=st.teacher||"";
+    cert.style.display = "block";
+
+    s_subject.innerText = s.subject;
+    s_supervisor.innerText = s.supervisor;
+    s_head.innerText = s.head;
+    s_principal.innerText = s.principal;
+
+    name.innerText = st.name || "";
+    stage.innerText = st.stage || "";
+    grade.innerText = st.grade || "";
+    fullMark.innerText = st.fullMark || "";
+    mark.innerText = st.mark || "";
+    teacher.innerText = st.teacher || "";
 }
 </script>
 
-</body></html>
+</body>
+</html>

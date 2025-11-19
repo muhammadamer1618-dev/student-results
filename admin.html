@@ -27,8 +27,8 @@ button{background:#1976d2;color:white;border:none}
 <input id="code" placeholder="كود الطالب">
 <input id="studentName" placeholder="اسم الطالب">
 
-<!-- ✨ هنا بدلنا المرحلة بخانة نوع الاختبار -->
-<input id="examType" placeholder="نوع الاختبار (فترة/قصير/نهائي ...)">
+<!-- نوع الاختبار -->
+<input id="examType" placeholder="نوع الاختبار (نهائي / شهري / قصير ...)">
 
 <input id="grade" placeholder="الصف">
 <input id="fullMark" placeholder="الدرجة النهائية">
@@ -46,20 +46,20 @@ function saveStudent(){
 
  if(code.value.trim()==="") return alert("ادخل كود الطالب");
 
- let all=localStorage.getItem('students');
- all=all?JSON.parse(all):{};
+ let all = localStorage.getItem('students');
+ all = all ? JSON.parse(all) : {};
 
- all[code.value]={
-   name: studentName.value,
-   examType: examType.value,  // ← محفوظ
-   grade: grade.value,
-   fullMark: fullMark.value,
-   mark: mark.value,
-   teacher: teacher.value
+ all[code.value] = {
+   name: studentName.value.trim(),
+   examType: examType.value.trim(),
+   grade: grade.value.trim(),
+   fullMark: Number(fullMark.value),
+   mark: Number(mark.value),
+   teacher: teacher.value.trim()
  };
 
  localStorage.setItem('students', JSON.stringify(all));
- alert("تم حفظ الطالب");
+ alert("تم حفظ الطالب بنجاح");
 }
 </script>
 

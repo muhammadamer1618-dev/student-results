@@ -10,7 +10,10 @@
 body{font-family:Calibri;background:#f2f6fa;margin:0}
 header{background:#1976d2;color:white;padding:20px;text-align:center;font-size:24px}
 .container{padding:25px}
-input,button{width:100%;padding:15px;margin-top:12px;font-size:18px;border-radius:8px;border:1px solid #999}
+input,button{
+    width:100%;padding:15px;margin-top:12px;
+    font-size:18px;border-radius:8px;border:1px solid #999
+}
 button{background:#1976d2;color:white;border:none}
 </style>
 </head>
@@ -23,12 +26,11 @@ button{background:#1976d2;color:white;border:none}
 
 <input id="code" placeholder="كود الطالب">
 <input id="studentName" placeholder="اسم الطالب">
-<input id="stage" placeholder="المرحلة">
+
+<!-- ✨ هنا بدلنا المرحلة بخانة نوع الاختبار -->
+<input id="examType" placeholder="نوع الاختبار (فترة/قصير/نهائي ...)">
+
 <input id="grade" placeholder="الصف">
-
-<!-- خانة نوع الاختبار الجديدة -->
-<input id="examType" placeholder="نوع الاختبار (نهائي/شهري/قصير...)">
-
 <input id="fullMark" placeholder="الدرجة النهائية">
 <input id="mark" placeholder="درجة الطالب">
 <input id="teacher" placeholder="اسم المعلم">
@@ -49,9 +51,8 @@ function saveStudent(){
 
  all[code.value]={
    name: studentName.value,
-   stage: stage.value,
+   examType: examType.value,  // ← محفوظ
    grade: grade.value,
-   examType: examType.value,   // ← حفظ نوع الاختبار
    fullMark: fullMark.value,
    mark: mark.value,
    teacher: teacher.value

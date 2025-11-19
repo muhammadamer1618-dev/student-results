@@ -53,7 +53,7 @@ td{
 
 <input id="code" placeholder="ادخل كود الطالب">
 <button onclick="loadData()">عرض</button>
-<button onclick="window.print()">طباعة</button>
+<button onclick='window.print()'>طباعة</button>
 <button onclick="location='index.html'">رجوع</button>
 
 <div id="cert">
@@ -63,7 +63,7 @@ td{
 
 <table>
 <tr><td class="label">المادة:</td><td class="value" id="s_subject"></td></tr>
-<tr><td class="label">اسم الطالب:</td><td class="value" id="name"></td></tr>
+<tr><td class="label">اسم الطالب:</td><td class="value" id="student_name"></td></tr>
 <tr><td class="label">المرحلة:</td><td class="value" id="stage"></td></tr>
 <tr><td class="label">الصف:</td><td class="value" id="grade"></td></tr>
 <tr><td class="label">الدرجة النهائية:</td><td class="value" id="fullMark"></td></tr>
@@ -98,34 +98,38 @@ function getS(){
 }
 
 function loadData(){
-    let codeValue = code.value.trim();
+    const codeInput = document.getElementById("code").value.trim();
     let all = localStorage.getItem('students');
 
-    if(!all){ alert("لا توجد بيانات"); return; }
+    if(!all){
+        alert("لا توجد بيانات");
+        return;
+    }
 
     all = JSON.parse(all);
 
-    if(!all[codeValue]){
+    if(!all[codeInput]){
         alert("لا يوجد طالب بهذا الكود");
         return;
     }
 
-    let st = all[codeValue];
-    let s = getS();
+    const st = all[codeInput];
+    const s  = getS();
 
+    const cert = document.getElementById("cert");
     cert.style.display = "block";
 
-    s_subject.innerText = s.subject;
-    s_supervisor.innerText = s.supervisor;
-    s_head.innerText = s.head;
-    s_principal.innerText = s.principal;
+    document.getElementById("s_subject").innerText    = s.subject || "";
+    document.getElementById("s_supervisor").innerText = s.supervisor || "";
+    document.getElementById("s_head").innerText       = s.head || "";
+    document.getElementById("s_principal").innerText  = s.principal || "";
 
-    name.innerText = st.name || "";
-    stage.innerText = st.stage || "";
-    grade.innerText = st.grade || "";
-    fullMark.innerText = st.fullMark || "";
-    mark.innerText = st.mark || "";
-    teacher.innerText = st.teacher || "";
+    document.getElementById("student_name").innerText = st.name || "";
+    document.getElementById("stage").innerText        = st.stage || "";
+    document.getElementById("grade").innerText        = st.grade || "";
+    document.getElementById("fullMark").innerText     = st.fullMark || "";
+    document.getElementById("mark").innerText         = st.mark || "";
+    document.getElementById("teacher").innerText      = st.teacher || "";
 }
 </script>
 
